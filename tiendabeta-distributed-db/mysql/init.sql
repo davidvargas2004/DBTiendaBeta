@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS categorias (
 -- ==========================================
 CREATE TABLE IF NOT EXISTS productos (
     id_producto INT AUTO_INCREMENT PRIMARY KEY,
-    id_marca INT NOT NULL,
-    id_categoria INT NOT NULL,
+        id_marca INT NOT NULL,
+        id_categoria INT NOT NULL,
     sku VARCHAR(50) UNIQUE NOT NULL COMMENT 'Código único de inventario',
     nombre VARCHAR(200) NOT NULL,
     modelo VARCHAR(100) NOT NULL,
