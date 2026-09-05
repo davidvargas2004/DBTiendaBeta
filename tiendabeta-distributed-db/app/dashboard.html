@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TiendaBeta | Dashboard Administrativo</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-bolt"></i>
+                    <span>TiendaBeta</span>
+                </div>
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <span class="nav-label">Principal</span>
+                    <a href="#" class="nav-item active" data-section="dashboard">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="productos">
+                        <i class="fas fa-box"></i>
+                        <span>Productos</span>
+                        <span class="badge" id="badge-productos">0</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="pedidos">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Pedidos</span>
+                        <span class="badge" id="badge-pedidos">0</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="ventas">
+                        <i class="fas fa-dollar-sign"></i>
+                        <span>Ventas</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-label">Gestión</span>
+                    <a href="#" class="nav-item" data-section="clientes">
+                        <i class="fas fa-users"></i>
+                        <span>Clientes</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="inventario">
+                        <i class="fas fa-warehouse"></i>
+                        <span>Inventario</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="reportes">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Reportes</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <span class="nav-label">Sistema</span>
+                    <a href="#" class="nav-item" data-section="configuracion">
+                        <i class="fas fa-cog"></i>
+                        <span>Configuración</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="user-avatar">AD</div>
+                    <div class="user-info">
+                        <span class="user-name">Admin</span>
+                        <span class="user-role">Administrador</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 class="page-title" id="pageTitle">Dashboard</h1>
+                    <span class="page-subtitle" id="pageSubtitle">Resumen general de TiendaBeta</span>
+                </div>
+                <div class="topbar-right">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Buscar productos, pedidos..." id="globalSearch">
+                    </div>
+                    <button class="icon-btn" id="themeToggle" title="Cambiar tema">
+                        <i class="fas fa-moon"></i>
+                    </button>
+                    <button class="icon-btn" id="refreshBtn" title="Actualizar datos">
+                        <i class="fas fa-sync-alt"></i>
+                    </button>
+                    <button class="icon-btn notification-btn" title="Notificaciones">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-dot"></span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="content">
+                <!-- DASHBOARD SECTION -->
+                <section class="section active" id="section-dashboard">
+                    <!-- KPI Cards -->
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon blue">
+                                <i class="fas fa-dollar-sign"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Ventas Totales</span>
+                                <span class="kpi-value" id="kpi-ventas">$0</span>
+                                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> 12.5%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon green">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Pedidos</span>
+                                <span class="kpi-value" id="kpi-pedidos">0</span>
+                                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> 8.2%</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon purple">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Productos</span>
+                                <span class="kpi-value" id="kpi-productos">0</span>
+                                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> 5 nuevos</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon orange">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Clientes</span>
+                                <span class="kpi-value" id="kpi-clientes">0</span>
+                                <span class="kpi-trend up"><i class="fas fa-arrow-up"></i> 3.1%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Row -->
+                    <div class="charts-row">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Ventas por Categoría</h3>
+                                <select class="chart-filter">
+                                    <option>Últimos 7 días</option>
+                                    <option>Últimos 30 días</option>
+                                    <option>Este año</option>
+                                </select>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="ventasChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h3>Estado de Pedidos</h3>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="pedidosChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Activity -->
+                    <div class="activity-row">
+                        <div class="activity-card">
+                            <h3><i class="fas fa-clock"></i> Pedidos Recientes</h3>
+                            <div class="activity-list" id="recentOrders">
+                                <!-- Se llena con JS -->
+                            </div>
+                        </div>
+                        <div class="activity-card">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Alertas de Stock</h3>
+                            <div class="activity-list" id="stockAlerts">
+                                <!-- Se llena con JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- PRODUCTOS SECTION -->
+                <section class="section" id="section-productos">
+                    <div class="section-header">
+                        <div class="filter-group">
+                            <select id="filterCategoria">
+                                <option value="">Todas las categorías</option>
+                                <option>Laptops</option>
+                                <option>Smartphones</option>
+                                <option>Accesorios</option>
+                                <option>Audio</option>
+                                <option>Monitores</option>
+                            </select>
+                            <select id="filterEstado">
+                                <option value="">Todos los estados</option>
+                                <option>activo</option>
+                                <option>inactivo</option>
+                                <option>agotado</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary" id="btnNuevoProducto">
+                            <i class="fas fa-plus"></i> Nuevo Producto
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table" id="tablaProductos">
+                            <thead>
+                                <tr>
+                                    <th>SKU</th>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyProductos">
+                                <!-- Se llena con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- PEDIDOS SECTION -->
+                <section class="section" id="section-pedidos">
+                    <div class="section-header">
+                        <div class="filter-group">
+                            <select id="filterEstadoPedido">
+                                <option value="">Todos los estados</option>
+                                <option>pendiente</option>
+                                <option>procesando</option>
+                                <option>enviado</option>
+                                <option>entregado</option>
+                                <option>cancelado</option>
+                            </select>
+                        </div>
+                        <button class="btn-primary" id="btnNuevoPedido">
+                            <i class="fas fa-plus"></i> Nuevo Pedido
+                        </button>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table" id="tablaPedidos">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Cliente</th>
+                                    <th>Fecha</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyPedidos">
+                                <!-- Se llena con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- VENTAS SECTION -->
+                <section class="section" id="section-ventas">
+                    <div class="kpi-grid">
+                        <div class="kpi-card">
+                            <div class="kpi-icon green">
+                                <i class="fas fa-chart-bar"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Ingresos del Mes</span>
+                                <span class="kpi-value" id="ventas-mes">$0</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon blue">
+                                <i class="fas fa-receipt"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Facturas Emitidas</span>
+                                <span class="kpi-value" id="facturas-mes">0</span>
+                            </div>
+                        </div>
+                        <div class="kpi-card">
+                            <div class="kpi-icon purple">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Impuestos Recaudados</span>
+                                <span class="kpi-value" id="impuestos-mes">$0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Factura</th>
+                                    <th>Pedido</th>
+                                    <th>Fecha</th>
+                                    <th>Subtotal</th>
+                                    <th>Impuestos</th>
+                                    <th>Total</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyVentas">
+                                <!-- Se llena con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- CLIENTES SECTION -->
+                <section class="section" id="section-clientes">
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Email</th>
+                                    <th>Teléfono</th>
+                                    <th>Estado</th>
+                                    <th>Registro</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbodyClientes">
+                                <!-- Se llena con JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- INVENTARIO SECTION -->
+                <section class="section" id="section-inventario">
+                    <div class="inventory-grid" id="inventoryGrid">
+                        <!-- Se llena con JS -->
+                    </div>
+                </section>
+
+                <!-- REPORTES SECTION -->
+                <section class="section" id="section-reportes">
+                    <div class="report-cards">
+                        <div class="report-card">
+                            <i class="fas fa-file-pdf"></i>
+                            <h3>Reporte de Ventas</h3>
+                            <p>Exportar ventas del mes en PDF</p>
+                            <button class="btn-secondary">Generar</button>
+                        </div>
+                        <div class="report-card">
+                            <i class="fas fa-file-excel"></i>
+                            <h3>Inventario</h3>
+                            <p>Exportar stock actual en Excel</p>
+                            <button class="btn-secondary">Generar</button>
+                        </div>
+                        <div class="report-card">
+                            <i class="fas fa-file-alt"></i>
+                            <h3>Pedidos</h3>
+                            <p>Historial completo de pedidos</p>
+                            <button class="btn-secondary">Generar</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- CONFIGURACION SECTION -->
+                <section class="section" id="section-configuracion">
+                    <div class="config-card">
+                        <h3><i class="fas fa-database"></i> Estado de Bases de Datos</h3>
+                        <div class="db-status">
+                            <div class="db-item">
+                                <div class="db-info">
+                                    <i class="fas fa-server" style="color: #3b82f6;"></i>
+                                    <div>
+                                        <strong>MySQL</strong>
+                                        <span>tiendabeta (Catálogo)</span>
+                                    </div>
+                                </div>
+                                <span class="status-badge online">Conectado</span>
+                            </div>
+                            <div class="db-item">
+                                <div class="db-info">
+                                    <i class="fas fa-server" style="color: #8b5cf6;"></i>
+                                    <div>
+                                        <strong>PostgreSQL</strong>
+                                        <span>tiendabeta_analytics (Transaccional)</span>
+                                    </div>
+                                </div>
+                                <span class="status-badge online">Conectado</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal para detalles -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Detalles</h3>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Contenido dinámico -->
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
